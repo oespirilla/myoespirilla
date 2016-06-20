@@ -1,4 +1,0 @@
-myoespirilla
-============
-
-Personal Website

@@ -1,23 +1,12 @@
-from ferris import fix_imports
-(fix_imports)
+from flask import Flask, send_file, request, make_response, redirect
+import logging
 
-# Import the application
+# Utility libaries
+import os
 
-import ferris
-import ferris.app
-import ferris.deferred_app
-import ferris.routes
-import app.routes
-import app.listeners
-from ferris.core import settings
-(app)
+app = Flask(__name__)
 
-main_app = ferris.app.app  # Main application
-deferred_app = ferris.deferred_app.app  # Deferred application
-
-settings.load_settings()
-appstats_settings = settings.get('appstats', {})
-
-if (appstats_settings.get('enabled', False) and ferris.app.debug) or appstats_settings.get('enabled_live', True):
-    from google.appengine.ext.appstats import recording
-    main_app = recording.appstats_wsgi_middleware(main_app)
+@app.route('/')
+# @cross_origin()
+def index():
+    return send_file("index.html")
